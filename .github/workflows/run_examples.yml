@@ -5,6 +5,12 @@ on:
     tags:
       - '*'
   workflow_dispatch:
+    inputs:
+      run_live:
+        description: Run examples that call the live Gemini service
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   run-examples:
@@ -59,6 +65,18 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          python -m compileall -q examples/getting_started
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.run_live }}" != "true" ]]; then
+            echo "Manual validation complete. Live examples were not requested."
+            exit 0
+          fi
+
+          if [ -z "${GEMINI_API_KEY:-}" ]; then
+            echo "::error::GEMINI_API_KEY is required to run live examples."
+            exit 1
+          fi
+
           cd examples/getting_started
           for f in *.py; do
             if [ "$f" = "human_in_the_loop.py" ]; then
