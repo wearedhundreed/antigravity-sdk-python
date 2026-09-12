@@ -2,8 +2,10 @@
 # Run: pip-compile --allow-unsafe --generate-hashes requirements-release.in
 #      to regenerate requirements-release.txt.
 build
+cryptography>=48.0.1
 tomli
-setuptools>=68.0
+pyasn1>=0.6.4
+setuptools>=83.0.0
 twine
 wheel
 typing-extensions
