@@ -2,6 +2,6 @@
 # Run: pip-compile --allow-unsafe --generate-hashes requirements-build.in
 #      to regenerate requirements-build.txt.
 build
-setuptools>=83.0.0
+setuptools>=84.2.1
 wheel
 grpcio-tools
