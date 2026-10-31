@@ -5,7 +5,7 @@ build
 cryptography>=50.0.0
 tomli
 pyasn1>=0.6.4
-setuptools>=83.0.0
+setuptools>=84.2.1
 twine
 wheel
 typing-extensions
